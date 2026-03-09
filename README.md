@@ -29,3 +29,9 @@ yarn workspace accelevent build
 | `build:js` | Bundle JS with esbuild |
 | `dev` | Watch CSS and JS for changes |
 | `clean` | Remove all compiled output |
+| `lint` | Run ESLint and Stylelint |
+| `lint:js` | Lint JS with ESLint |
+| `lint:scss` | Lint SCSS with Stylelint |
+| `fix` | Auto-fix ESLint and Stylelint issues |
+| `format` | Format JS and SCSS with Prettier |
+| `check-format` | Check formatting without writing changes |

@@ -17,7 +17,19 @@
     "build": "run-s clean build:css build:js",
     "watch:css": "NODE_ENV=development node build-css.js && chokidar './src/scss/**/*.scss' -c 'NODE_ENV=development node build-css.js'",
     "watch:js": "node esbuild.config.js --node-env development",
-    "dev": "run-p watch:css watch:js"
+    "dev": "run-p watch:css watch:js",
+    "lint": "run-s lint:js lint:scss",
+    "lint:js": "eslint \"./src/js/**/*.js\"",
+    "lint:scss": "stylelint \"./src/scss/**/*.scss\" --config stylelint.config.js",
+    "fix": "run-s fix:js fix:scss",
+    "fix:js": "eslint \"./src/js/**/*.js\" --fix",
+    "fix:scss": "stylelint \"./src/scss/**/*.scss\" --config stylelint.config.js --fix",
+    "check-format": "run-s check-format:js check-format:scss",
+    "check-format:js": "prettier \"./src/js/**/*.js\" --check",
+    "check-format:scss": "prettier \"./src/scss/**/*.scss\" --check",
+    "format": "run-s format:js format:scss",
+    "format:js": "prettier \"./src/js/**/*.js\" --write",
+    "format:scss": "prettier \"./src/scss/**/*.scss\" --write"
   },
   "dependencies": {
     "esbuild": "^0.25.2",
@@ -26,10 +38,16 @@
   "devDependencies": {
     "autoprefixer": "^10.4.24",
     "chokidar-cli": "^3.0.0",
+    "eslint": "^10.0.3",
     "npm-run-all2": "^7.0.2",
     "postcss": "^8.5.3",
     "postcss-cli": "^11.0.1",
-    "shx": "^0.4.0"
+    "postcss-scss": "^4.0.9",
+    "prettier": "^3.8.1",
+    "shx": "^0.4.0",
+    "stylelint": "^17.4.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-scss": "^7.0.0"
   },
   "packageManager": "yarn@1.22.22"
 }
