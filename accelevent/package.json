@@ -1,0 +1,7 @@
+{
+  "name": "accelevent",
+  "version": "1.0.0",
+  "description": "Build tooling for Accelevent static assets",
+  "license": "MPL-2.0",
+  "private": true
+}
