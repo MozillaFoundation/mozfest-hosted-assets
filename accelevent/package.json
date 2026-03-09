@@ -3,5 +3,29 @@
   "version": "1.0.0",
   "description": "Build tooling for Accelevent static assets",
   "license": "MPL-2.0",
-  "private": true
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "clean:css": "shx rm -rf ./dist/temp/* ./dist/css/*",
+    "clean": "run-s clean:css",
+    "build:css": "NODE_ENV=production node build-css.js",
+    "build": "run-s clean build:css",
+    "watch:css": "NODE_ENV=development node build-css.js && chokidar './src/scss/**/*.scss' -c 'NODE_ENV=development node build-css.js'",
+    "dev": "run-s watch:css"
+  },
+  "dependencies": {
+    "sass": "^1.86.3"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.24",
+    "chokidar-cli": "^3.0.0",
+    "npm-run-all2": "^7.0.2",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1",
+    "shx": "^0.4.0"
+  },
+  "packageManager": "yarn@1.22.22"
 }
