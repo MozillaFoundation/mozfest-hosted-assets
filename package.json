@@ -1,0 +1,9 @@
+{
+  "name": "mozfest-hosted-assets",
+  "version": "1.0.0",
+  "license": "MPL-2.0",
+  "private": true,
+  "workspaces": [
+    "accelevent"
+  ]
+}
