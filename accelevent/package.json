@@ -10,13 +10,17 @@
   },
   "scripts": {
     "clean:css": "shx rm -rf ./dist/temp/* ./dist/css/*",
-    "clean": "run-s clean:css",
+    "clean:js": "shx rm -rf ./dist/js/*",
+    "clean": "run-p clean:css clean:js",
     "build:css": "NODE_ENV=production node build-css.js",
-    "build": "run-s clean build:css",
+    "build:js": "node esbuild.config.js --node-env production",
+    "build": "run-s clean build:css build:js",
     "watch:css": "NODE_ENV=development node build-css.js && chokidar './src/scss/**/*.scss' -c 'NODE_ENV=development node build-css.js'",
-    "dev": "run-s watch:css"
+    "watch:js": "node esbuild.config.js --node-env development",
+    "dev": "run-p watch:css watch:js"
   },
   "dependencies": {
+    "esbuild": "^0.25.2",
     "sass": "^1.86.3"
   },
   "devDependencies": {
