@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "accelevent/**"
+      - "index.html"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
@@ -47,6 +48,7 @@ jobs:
       - name: Prepare Pages artifact
         run: |
           mkdir -p _site/accelevent/css _site/accelevent/js
+          cp index.html _site/index.html
           cp -r accelevent/dist/css/. _site/accelevent/css/
           cp -r accelevent/dist/js/. _site/accelevent/js/
 
