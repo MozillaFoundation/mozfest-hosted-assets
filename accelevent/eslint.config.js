@@ -1,4 +1,3 @@
-/** @type {import("eslint/use-at-your-own-risk").FlatConfig[]} */
 export default [
   {
     files: ["**/*.js"],
