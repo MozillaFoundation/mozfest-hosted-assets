@@ -27,7 +27,7 @@ Compiled assets are deployed to GitHub Pages on every push to `main` that change
 **Testing URL pattern:**
 
 ```text
-https://mozillafoundation.github.io/mozfest-hosted-assets/{project}/{css|js}/{filename}
+https://mozillafoundation.github.io/mozfest-hosted-assets/{platform}/{css|js}/{filename}
 ```
 
 **Production** assets are served from S3.
