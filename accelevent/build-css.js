@@ -1,5 +1,5 @@
 import { execSync } from "child_process";
-import { mkdirSync, readdirSync } from "fs";
+import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -47,6 +47,9 @@ function buildEntry(entry, inputPath, outputDir, { minify = false } = {}) {
       : `postcss ${tempOutput} -o ${finalOutput} --config ./postcss.config.js`;
 
     execSync(postcssCmd, { stdio: "inherit" });
+
+    const banner = `/*! mozfest-hosted-assets | Accelevents | ${entry} | built: ${new Date().toISOString()} */\n\n`;
+    writeFileSync(finalOutput, banner + readFileSync(finalOutput, "utf8"));
 
     console.log(`Built CSS: ${entry} → ${finalOutput}`);
   } catch (err) {
