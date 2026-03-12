@@ -53,11 +53,13 @@ Some Accelevents features are embedded via iframe. Because iframes block externa
 
 | Script | Description |
 | --- | --- |
-| `build` | Clean and compile CSS and JS for production |
+| `build` | Clean and compile CSS, JS, and images for production |
 | `build:css` | Compile SCSS to CSS |
 | `build:js` | Bundle JS with esbuild |
+| `build:images` | Copy images to `dist/hosted/images/` |
 | `dev` | Watch CSS and JS for changes |
 | `clean` | Remove all compiled output |
+| `clean:images` | Remove compiled image output (`dist/hosted/images/`) |
 | `clean:widgets` | Remove compiled widget output (`dist/embed/`) |
 | `lint` | Run ESLint and Stylelint |
 | `lint:js` | Lint JS with ESLint |
