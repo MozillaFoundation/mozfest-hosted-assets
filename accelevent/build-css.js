@@ -1,5 +1,5 @@
 import { execSync } from "child_process";
-import { mkdirSync } from "fs";
+import { mkdirSync, readdirSync } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -8,30 +8,49 @@ const __dirname = path.dirname(__filename);
 
 const isDev = process.env.NODE_ENV !== "production";
 
-// SCSS entry point (filename without extension)
-const entry = "main";
-const input = path.resolve(__dirname, `./src/scss/${entry}.scss`);
-const tempOutput = path.resolve(__dirname, `./dist/temp/${entry}.unprocessed.css`);
-const finalOutput = path.resolve(__dirname, `./dist/css/${entry}.compiled.css`);
+// Build main CSS
+buildEntry("main", path.resolve(__dirname, "./src/scss/main.scss"), "./dist/hosted/css");
 
-mkdirSync(path.resolve(__dirname, "./dist/temp"), { recursive: true });
-mkdirSync(path.resolve(__dirname, "./dist/css"), { recursive: true });
-
+// Build widget CSS — each .scss file in src/scss/widgets/ becomes its own compiled output
+const widgetsDir = path.resolve(__dirname, "./src/scss/widgets");
 try {
-  const sassCmd = isDev
-    ? `sass ${input} ${tempOutput} --source-map --quiet`
-    : `sass ${input} ${tempOutput} --style=compressed --quiet`;
-
-  execSync(sassCmd, { stdio: "inherit" });
-
-  const postcssCmd = isDev
-    ? `postcss ${tempOutput} -o ${finalOutput} --config ./postcss.config.js --map`
-    : `postcss ${tempOutput} -o ${finalOutput} --config ./postcss.config.js`;
-
-  execSync(postcssCmd, { stdio: "inherit" });
-
-  console.log(`Built CSS: ${entry}`);
+  const widgetFiles = readdirSync(widgetsDir).filter((f) => f.endsWith(".scss"));
+  for (const file of widgetFiles) {
+    const entry = `widget-${file.replace(".scss", "")}`;
+    buildEntry(entry, path.resolve(widgetsDir, file), "./dist/embed", { minify: false });
+  }
 } catch (err) {
-  console.error("Failed to build CSS:", err.message);
-  process.exit(1);
+  if (err.code !== "ENOENT") {
+    console.error("Failed to read widgets directory:", err.message);
+    process.exit(1);
+  }
+}
+
+function buildEntry(entry, inputPath, outputDir, { minify = false } = {}) {
+  const tempOutput = path.resolve(__dirname, `./dist/temp/${entry}.unprocessed.css`);
+  const finalOutput = path.resolve(__dirname, `${outputDir}/${entry}.compiled.css`);
+
+  mkdirSync(path.resolve(__dirname, "./dist/temp"), { recursive: true });
+  mkdirSync(path.resolve(__dirname, outputDir), { recursive: true });
+
+  try {
+    const sassCmd = isDev
+      ? `sass ${inputPath} ${tempOutput} --source-map --quiet`
+      : minify
+        ? `sass ${inputPath} ${tempOutput} --style=compressed --quiet`
+        : `sass ${inputPath} ${tempOutput} --quiet`;
+
+    execSync(sassCmd, { stdio: "inherit" });
+
+    const postcssCmd = isDev
+      ? `postcss ${tempOutput} -o ${finalOutput} --config ./postcss.config.js --map`
+      : `postcss ${tempOutput} -o ${finalOutput} --config ./postcss.config.js`;
+
+    execSync(postcssCmd, { stdio: "inherit" });
+
+    console.log(`Built CSS: ${entry} → ${finalOutput}`);
+  } catch (err) {
+    console.error(`Failed to build CSS (${entry}):`, err.message);
+    process.exit(1);
+  }
 }

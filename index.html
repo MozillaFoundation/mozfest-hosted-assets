@@ -71,6 +71,28 @@
         padding: 0.1em 0.3em;
         color: #0003a6;
       }
+
+      hr {
+        border: none;
+        border-top: 1px solid #e7e7fc;
+        margin: 2rem 0;
+      }
+
+      .note {
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: 0.5rem;
+        line-height: 1.5;
+      }
+
+      .note code {
+        font-family: ui-monospace, monospace;
+        background: #e7e7fc;
+        border-radius: 4px;
+        padding: 0.1em 0.35em;
+        font-size: 0.95em;
+        color: #0003a6;
+      }
     </style>
   </head>
   <body>
@@ -81,12 +103,18 @@
         This GitHub Pages site is used for testing — production assets are
         served from S3.
       </p>
-      <div class="label">URL pattern</div>
+      <div class="label">Hosted assets (link as external files)</div>
       <div class="url-pattern">
         https://mozillafoundation.github.io/mozfest-hosted-assets/<em>{platform}</em>/<em>{css|js}</em>/<em
           >{filename}</em
         >
       </div>
+      <hr />
+      <div class="label">Platform widgets (paste into dashboard)</div>
+      <p class="note">
+        Widget assets are not hosted. Copy the compiled CSS or JS from
+        <code>dist/embed/</code> and paste directly into the platform dashboard.
+      </p>
     </div>
   </body>
 </html>

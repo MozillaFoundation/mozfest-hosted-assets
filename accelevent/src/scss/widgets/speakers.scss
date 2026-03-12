@@ -1,0 +1,17 @@
+$num-per-row: 6;
+$gap: 8px;
+
+.speaker-card .speakers-carousel .speaker-card-inner {
+  background: red;
+  margin: 0;
+  gap: $gap;
+}
+
+.speaker-card .speakers-carousel .speaker-card-inner .slick-slide-speaker {
+  background: green;
+  margin: 0;
+  padding: 0;
+  width: calc((100% - ($num-per-row - 1) * $gap) / $num-per-row);
+  min-width: auto;
+  max-width: none;
+}
