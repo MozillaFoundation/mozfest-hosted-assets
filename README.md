@@ -13,7 +13,7 @@ yarn install
 Then run scripts per platform using `yarn workspace <platform> <script>`:
 
 ```bash
-yarn workspace accelevent build
+yarn workspace accelevents build
 ```
 
 ## Hosting
@@ -38,10 +38,10 @@ Some Accelevents features are embedded via iframe. Because iframes block externa
 
 **Sources:**
 
-- CSS: `accelevent/src/scss/widgets/` — one `.scss` file per widget
-- JS: `accelevent/src/js/widgets/` — one `.js` file per widget
+- CSS: `accelevents/src/scss/widgets/` — one `.scss` file per widget
+- JS: `accelevents/src/js/widgets/` — one `.js` file per widget
 
-**Compiled output:** `accelevent/dist/embed/` — generated automatically by `build:css` and `build:js`
+**Compiled output:** `accelevents/dist/embed/` — generated automatically by `build:css` and `build:js`
 
 **Deployment workflow:**
 

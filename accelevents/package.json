@@ -1,7 +1,7 @@
 {
-  "name": "accelevent",
+  "name": "accelevents",
   "version": "1.0.0",
-  "description": "Build tooling for Accelevent static assets",
+  "description": "Build tooling for Accelevents static assets",
   "license": "MPL-2.0",
   "private": true,
   "type": "module",
