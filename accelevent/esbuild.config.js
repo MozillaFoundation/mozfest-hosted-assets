@@ -18,12 +18,15 @@ const entry = "main";
 const entryPoint = path.join(__dirname, `./src/js/${entry}.js`);
 const outFile = path.join(__dirname, `./dist/hosted/js/${entry}.compiled.js`);
 
+const buildTimestamp = new Date().toISOString();
+
 const mainOpts = {
   entryPoints: [entryPoint],
   outfile: outFile,
   bundle: true,
   sourcemap: !inProduction,
   minify: inProduction,
+  banner: { js: `/* mozfest-hosted-assets | Accelevents | ${entry} | built: ${buildTimestamp} */` },
   define: {
     "process.env.NODE_ENV": JSON.stringify(mode),
   },
@@ -43,37 +46,35 @@ try {
   }
 }
 
-const widgetOpts =
-  widgetEntries.length > 0
-    ? {
-        entryPoints: widgetEntries,
-        outdir: path.join(__dirname, "./dist/embed"),
-        entryNames: "widget-[name].compiled",
-        bundle: true,
-        sourcemap: !inProduction,
-        minify: false,
-        define: {
-          "process.env.NODE_ENV": JSON.stringify(mode),
-        },
-      }
-    : null;
+const widgetOpts = widgetEntries.map((entryFile) => {
+  const widgetName = `widget-${path.basename(entryFile, ".js")}`;
+  return {
+    entryPoints: [entryFile],
+    outfile: path.join(__dirname, `./dist/embed/${widgetName}.compiled.js`),
+    bundle: true,
+    sourcemap: !inProduction,
+    minify: false,
+    banner: { js: `/* mozfest-hosted-assets | Accelevents | ${widgetName} | built: ${buildTimestamp} */` },
+    define: {
+      "process.env.NODE_ENV": JSON.stringify(mode),
+    },
+  };
+});
 
 if (inProduction) {
   await build(mainOpts);
   console.log(`Built JS: ${entry}`);
-  if (widgetOpts) {
-    await build(widgetOpts);
-    widgetEntries.forEach((e) =>
-      console.log(`Built JS: ${path.basename(e)} → dist/embed/`)
-    );
+  for (const opts of widgetOpts) {
+    await build(opts);
+    console.log(`Built JS: ${path.basename(opts.outfile)} → dist/embed/`);
   }
 } else {
   const ctx = await context(mainOpts);
   await ctx.watch();
   console.log(`Watching JS: ${entry}...`);
-  if (widgetOpts) {
-    const widgetCtx = await context(widgetOpts);
+  for (const opts of widgetOpts) {
+    const widgetCtx = await context(opts);
     await widgetCtx.watch();
-    console.log("Watching widget JS...");
+    console.log(`Watching JS: ${path.basename(opts.outfile)}...`);
   }
 }
