@@ -4,6 +4,6 @@
   "license": "MPL-2.0",
   "private": true,
   "workspaces": [
-    "accelevent"
+    "accelevents"
   ]
 }
