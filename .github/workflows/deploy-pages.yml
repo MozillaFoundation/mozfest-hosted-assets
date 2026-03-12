@@ -49,8 +49,8 @@ jobs:
         run: |
           mkdir -p _site/accelevent/css _site/accelevent/js
           cp index.html _site/index.html
-          cp -r accelevent/dist/css/. _site/accelevent/css/
-          cp -r accelevent/dist/js/. _site/accelevent/js/
+          cp -r accelevent/dist/hosted/css/. _site/accelevent/css/
+          cp -r accelevent/dist/hosted/js/. _site/accelevent/js/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

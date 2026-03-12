@@ -11,7 +11,8 @@
   "scripts": {
     "clean:css": "shx rm -rf ./dist/temp/* ./dist/css/*",
     "clean:js": "shx rm -rf ./dist/js/*",
-    "clean": "run-p clean:css clean:js",
+    "clean:widgets": "shx rm -rf ./dist/widgets/*",
+    "clean": "run-p clean:css clean:js clean:widgets",
     "build:css": "NODE_ENV=production node build-css.js",
     "build:js": "node esbuild.config.js --node-env production",
     "build": "run-s clean build:css build:js",

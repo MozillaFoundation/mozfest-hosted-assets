@@ -1,3 +1,13 @@
 body {
   background: salmon !important;
 }
+
+.speaker-card .speakers-carousel .speaker-card-inner {
+  margin: 0;
+  gap: 8px;
+}
+
+.speaker-card .speakers-carousel .speaker-card-inner .slick-slide-speaker {
+  margin: 0;
+  padding: 0;
+}
