@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "accelevent/**"
+      - "accelevents/**"
       - "index.html"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
@@ -36,21 +36,21 @@ jobs:
           node-version: "20"
 
       - name: Enable Corepack and install dependencies
-        working-directory: accelevent
+        working-directory: accelevents
         run: |
           corepack enable
           yarn install --frozen-lockfile
 
       - name: Build assets
-        working-directory: accelevent
+        working-directory: accelevents
         run: yarn build
 
       - name: Prepare Pages artifact
         run: |
-          mkdir -p _site/accelevent/css _site/accelevent/js
+          mkdir -p _site/accelevents/css _site/accelevents/js
           cp index.html _site/index.html
-          cp -r accelevent/dist/hosted/css/. _site/accelevent/css/
-          cp -r accelevent/dist/hosted/js/. _site/accelevent/js/
+          cp -r accelevents/dist/hosted/css/. _site/accelevents/css/
+          cp -r accelevents/dist/hosted/js/. _site/accelevents/js/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
