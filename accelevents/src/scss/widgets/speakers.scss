@@ -1,5 +1,25 @@
+@use "sass:map";
+
+$breakpoints: (
+  "small": 0,
+  // phones
+  "medium": 640px,
+  // large phones, small tablets
+  "large": 1024px,
+  // tablets, small laptops
+  "xlarge": 1200px,
+  // laptops, small desktops
+  "xxlarge": 1440px,
+  // standard desktops
+  "xxxlarge": 1920px, // large desktops, full HD displays
+);
+
 $num-per-row: 6;
 $gap: 8px;
+
+@mixin grid-width($n) {
+  width: calc((100% - ($n - 1) * $gap) / $n);
+}
 
 .speaker-card .speakers-carousel .speaker-card-inner {
   margin: 0;
@@ -8,17 +28,33 @@ $gap: 8px;
   .slick-slide-speaker {
     margin: 0;
     padding: 0;
-    width: calc((100% - ($num-per-row - 1) * $gap) / $num-per-row);
     min-width: auto;
     max-width: none;
+
+    @include grid-width(2);
+
+    @media (min-width: map.get($breakpoints, "large")) {
+      @include grid-width(3);
+    }
+
+    @media (min-width: map.get($breakpoints, "xlarge")) {
+      @include grid-width($num-per-row);
+    }
 
     .speaker-slide {
       padding: 0;
 
       /* stylelint-disable-next-line selector-class-pattern */
-      .ae-image-label.large .imageType_avatar img {
-        width: 100%;
-        border-radius: unset;
+      .ae-image-label.large .imageType_avatar {
+        aspect-ratio: 2 / 3;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: unset;
+        }
       }
     }
   }

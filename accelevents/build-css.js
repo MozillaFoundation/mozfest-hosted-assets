@@ -48,7 +48,12 @@ function buildEntry(entry, inputPath, outputDir, { minify = false } = {}) {
 
     execSync(postcssCmd, { stdio: "inherit" });
 
-    const banner = `/*! mozfest-hosted-assets | Accelevents | ${entry} | built: ${new Date().toISOString()} */\n\n`;
+    const banner = `
+.do-not-edit---generated-by-mozfest-hosted-assets-build-pipeline {
+  /* mozfest-hosted-assets | Accelevents | ${entry} | built: ${new Date().toISOString()} */
+  background: transparent;
+}
+`;
     writeFileSync(finalOutput, banner + readFileSync(finalOutput, "utf8"));
 
     console.log(`Built CSS: ${entry} → ${finalOutput}`);
