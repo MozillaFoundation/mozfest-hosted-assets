@@ -10,7 +10,7 @@ const isDev = process.env.NODE_ENV !== "production";
 
 // Build main CSS
 buildEntry("main", path.resolve(__dirname, "./src/scss/main.scss"), "./dist/hosted/css", {
-  prependCss: path.resolve(__dirname, "./src/css/mofo-site-base.css"),
+  prependCss: path.resolve(__dirname, "./src/vendor/mofo-branding.css"),
 });
 
 // Build widget CSS — each .scss file in src/scss/widgets/ becomes its own compiled output
