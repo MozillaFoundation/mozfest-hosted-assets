@@ -219,7 +219,7 @@ $link-text-styles: (
 @mixin mofo-text-style($map-name, $key, $font-family: $body-font-family) {
   $small-styles: get-text-styles($map-name, $key, "small");
 
-  font-family: $font-family;
+  font-family: $font-family !important;
 
   @each $property, $value in $small-styles {
     #{$property}: $value;
@@ -259,7 +259,7 @@ $link-text-styles: (
   @if not $styles {
     @warn "No styles found for #{$key} at #{$breakpoint} breakpoint";
   } @else {
-    font-family: $font-family;
+    font-family: $font-family !important;
 
     @each $property, $value in $styles {
       #{$property}: $value;
@@ -308,7 +308,7 @@ body {
 // ===================================
 
 .lede-text {
-  font-family: $body-font-family;
+  font-family: $body-font-family !important;
   font-size: rem-calc(20);
   line-height: 1.2;
   font-weight: map.get($font-weights, regular);
