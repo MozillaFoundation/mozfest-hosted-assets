@@ -1,0 +1,101 @@
+// =============================================================================
+// Copied from: https://github.com/MozillaFoundation/foundation.mozilla.org
+// Source: foundation_cms/static/scss/settings/customized-settings.scss
+//         (Foundation framework util functions/mixins extracted as standalone)
+// Do not modify — only update if the source code on foundation.mozilla.org changes.
+// =============================================================================
+
+@use "sass:math";
+
+// Replaces Foundation Framework's rem-calc()
+@function rem-calc($values) {
+  $result: ();
+  @each $value in $values {
+    @if $value == 0 {
+      $result: append($result, 0);
+    } @else {
+      $result: append($result, math.div($value, 16) * 1rem);
+    }
+  }
+  @return if(length($result) == 1, nth($result, 1), $result);
+}
+
+// Replaces Foundation Framework's breakpoint() — only "large" (1024px+) is used in these files
+@mixin breakpoint($size) {
+  @media screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+// Variables from foundation.mozilla.org customized-settings needed by _type and _buttons
+$black: #000000;
+$body-font-family: "Mozilla Text", "Helvetica Neue", Arial, sans-serif;
+$header-font-family: "Mozilla Headline", "Helvetica Neue", Arial, sans-serif;
+$global-lineheight: 1.5;
+
+$header-styles: (
+  small: (
+    "h1": (
+      "font-size": rem-calc(40),
+      "line-height": 0.9,
+      "font-weight": 600,
+    ),
+    "h2": (
+      "font-size": rem-calc(32),
+      "line-height": 0.9,
+      "font-weight": 600,
+    ),
+    "h3": (
+      "font-size": rem-calc(28),
+      "line-height": 0.9,
+      "font-weight": 600,
+    ),
+    "h4": (
+      "font-size": rem-calc(24),
+      "line-height": 1,
+      "font-weight": 600,
+    ),
+    "h5": (
+      "font-size": rem-calc(20),
+      "line-height": 1.1,
+      "font-weight": 700,
+    ),
+    "h6": (
+      "font-size": rem-calc(18),
+      "line-height": 1.1,
+      "font-weight": 700,
+    ),
+  ),
+  large: (
+    "h1": (
+      "font-size": rem-calc(64),
+      "line-height": 0.9,
+      "font-weight": 600,
+    ),
+    "h2": (
+      "font-size": rem-calc(52),
+      "line-height": 0.9,
+      "font-weight": 600,
+    ),
+    "h3": (
+      "font-size": rem-calc(40),
+      "line-height": 0.9,
+      "font-weight": 600,
+    ),
+    "h4": (
+      "font-size": rem-calc(32),
+      "line-height": 1,
+      "font-weight": 600,
+    ),
+    "h5": (
+      "font-size": rem-calc(24),
+      "line-height": 1.1,
+      "font-weight": 700,
+    ),
+    "h6": (
+      "font-size": rem-calc(20),
+      "line-height": 1.1,
+      "font-weight": 700,
+    ),
+  ),
+);
