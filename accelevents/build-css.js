@@ -9,9 +9,7 @@ const __dirname = path.dirname(__filename);
 const isDev = process.env.NODE_ENV !== "production";
 
 // Build main CSS
-buildEntry("main", path.resolve(__dirname, "./src/scss/main.scss"), "./dist/hosted/css", {
-  prependCss: path.resolve(__dirname, "./src/vendor/mofo-branding.css"),
-});
+buildEntry("main", path.resolve(__dirname, "./src/scss/main.scss"), "./dist/hosted/css");
 
 // Build widget CSS — each .scss file in src/scss/widgets/ becomes its own compiled output
 const widgetsDir = path.resolve(__dirname, "./src/scss/widgets");
@@ -28,7 +26,7 @@ try {
   }
 }
 
-function buildEntry(entry, inputPath, outputDir, { minify = false, prependCss = null } = {}) {
+function buildEntry(entry, inputPath, outputDir, { minify = false } = {}) {
   const tempOutput = path.resolve(__dirname, `./dist/temp/${entry}.unprocessed.css`);
   const finalOutput = path.resolve(__dirname, `${outputDir}/${entry}.compiled.css`);
 
@@ -56,8 +54,7 @@ function buildEntry(entry, inputPath, outputDir, { minify = false, prependCss = 
   background: transparent;
 }
 `;
-    const prepend = prependCss ? readFileSync(prependCss, "utf8") + "\n" : "";
-    writeFileSync(finalOutput, banner + prepend + readFileSync(finalOutput, "utf8"));
+    writeFileSync(finalOutput, banner + readFileSync(finalOutput, "utf8"));
 
     console.log(`Built CSS: ${entry} → ${finalOutput}`);
   } catch (err) {
