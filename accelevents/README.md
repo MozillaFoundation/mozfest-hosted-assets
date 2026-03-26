@@ -2,32 +2,6 @@
 
 Build tooling for MozFest static assets hosted on Accelevents.
 
-## Hosted page assets
-
-Scripts and styles injected into the main Accelevents event page via URL (loaded by the Accelevents dashboard as external assets).
-
-**Sources:**
-
-```text
-src/
-  scss/
-    main.scss             ← main stylesheet, imports vendor and feature partials
-  js/
-    main.js               ← entry point, imports from features/
-    features/             ← one .js file per page feature
-```
-
-**Compiled output:** `dist/hosted/` — generated automatically by `build:css` and `build:js`
-
-**Deployment workflow:**
-
-1. Edit or add files in `src/scss/` or `src/js/features/`
-2. Import new feature files in `src/js/main.js`
-3. Run `build` (or `build:css` / `build:js`) to compile
-4. The compiled assets in `dist/hosted/` are deployed to S3 via the GitHub Actions workflow
-
----
-
 ## Widget assets
 
 Some Accelevents features are embedded via iframe. Because iframes block external stylesheets and scripts, widget assets cannot be loaded by URL — they must be pasted directly into the Accelevents dashboard.
