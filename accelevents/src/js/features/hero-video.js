@@ -34,6 +34,7 @@ function initHeroVideoPauseButton() {
   button.id = BUTTON_ID;
   button.className = BUTTON_CLASS;
   button.setAttribute("aria-label", LABEL_PAUSE);
+  button.textContent = LABEL_PAUSE;
   beeButtonContent.replaceWith(button);
 
   const player = new window.Vimeo.Player(iframe);
@@ -45,11 +46,13 @@ function initHeroVideoPauseButton() {
       paused = false;
       button.classList.remove(CLASS_PAUSED);
       button.setAttribute("aria-label", LABEL_PAUSE);
+      button.textContent = LABEL_PAUSE;
     } else {
       player.pause();
       paused = true;
       button.classList.add(CLASS_PAUSED);
       button.setAttribute("aria-label", LABEL_PLAY);
+      button.textContent = LABEL_PLAY;
     }
   });
 
