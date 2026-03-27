@@ -22,8 +22,8 @@ function initHeroVideoPauseButton() {
   // Guard: only proceed if the iframe is a Vimeo player
   if (!iframe.src.includes("player.vimeo.com")) return;
 
-  const LABEL_PAUSE = "Pause video";
-  const LABEL_PLAY = "Play video";
+  const LABEL_PAUSE = "Pause";
+  const LABEL_PLAY = "Play";
   const CLASS_PAUSED = "is-paused";
   const BUTTON_ID = "hero_video_pause_button_accessible";
   const BUTTON_CLASS = "hero-video-pause-button";
@@ -34,7 +34,10 @@ function initHeroVideoPauseButton() {
   button.id = BUTTON_ID;
   button.className = BUTTON_CLASS;
   button.setAttribute("aria-label", LABEL_PAUSE);
-  button.textContent = LABEL_PAUSE;
+  // Wrap text in a span so SCSS can use ::before for the icon without affecting button text
+  const label = document.createElement("span");
+  label.textContent = LABEL_PAUSE;
+  button.appendChild(label);
   beeButtonContent.replaceWith(button);
 
   const player = new window.Vimeo.Player(iframe);
@@ -46,13 +49,13 @@ function initHeroVideoPauseButton() {
       paused = false;
       button.classList.remove(CLASS_PAUSED);
       button.setAttribute("aria-label", LABEL_PAUSE);
-      button.textContent = LABEL_PAUSE;
+      label.textContent = LABEL_PAUSE;
     } else {
       player.pause();
       paused = true;
       button.classList.add(CLASS_PAUSED);
       button.setAttribute("aria-label", LABEL_PLAY);
-      button.textContent = LABEL_PLAY;
+      label.textContent = LABEL_PLAY;
     }
   });
 
