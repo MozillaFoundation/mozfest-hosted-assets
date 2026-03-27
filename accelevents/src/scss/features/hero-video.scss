@@ -3,6 +3,7 @@
 .hero-video-pause-button {
   @include mofo-text-style($header-styles, "h5", $header-font-family);
 
+  color: map.get($mofo-colors, white);
   background: transparent;
   border: none;
 
