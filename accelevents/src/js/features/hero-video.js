@@ -22,14 +22,18 @@ function initHeroVideoPauseButton() {
   // Guard: only proceed if the iframe is a Vimeo player
   if (!iframe.src.includes("player.vimeo.com")) return;
 
-  const LABEL_PAUSE = "Pause Video";
-  const LABEL_PLAY = "Play Video";
+  const LABEL_PAUSE = "Pause video";
+  const LABEL_PLAY = "Play video";
+  const CLASS_PAUSED = "is-paused";
+  const BUTTON_ID = "hero_video_pause_button_accessible";
+  const BUTTON_CLASS = "hero-video-pause-button";
 
   // Remove the non-semantic .bee-button-content div and insert a real <button> in its place
   const button = document.createElement("button");
   button.type = "button";
-  button.id = "hero_video_pause_button_accessible";
-  button.textContent = LABEL_PAUSE;
+  button.id = BUTTON_ID;
+  button.className = BUTTON_CLASS;
+  button.setAttribute("aria-label", LABEL_PAUSE);
   beeButtonContent.replaceWith(button);
 
   const player = new window.Vimeo.Player(iframe);
@@ -39,17 +43,19 @@ function initHeroVideoPauseButton() {
     if (paused) {
       player.play();
       paused = false;
-      button.textContent = LABEL_PAUSE;
+      button.classList.remove(CLASS_PAUSED);
+      button.setAttribute("aria-label", LABEL_PAUSE);
     } else {
       player.pause();
       paused = true;
-      button.textContent = LABEL_PLAY;
+      button.classList.add(CLASS_PAUSED);
+      button.setAttribute("aria-label", LABEL_PLAY);
     }
   });
 
-  // Set initial label once the player is ready (video autoplays on load)
+  // Set initial aria-label once the player is ready (video autoplays on load)
   player.ready().then(() => {
-    button.textContent = LABEL_PAUSE;
+    button.setAttribute("aria-label", LABEL_PAUSE);
   });
 }
 
