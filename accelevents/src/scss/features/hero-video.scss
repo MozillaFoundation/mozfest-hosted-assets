@@ -1,10 +1,22 @@
-.hero-video-pause-button {
-  background-image: url("#{$base-url}/images/icons/pause.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
+@use "sass:map";
 
-  &.is-paused {
+.hero-video-pause-button {
+  @include mofo-text-style($header-styles, "h5", $header-font-family);
+
+  span::before {
+    content: "";
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    background-color: map.get($mofo-colors, black);
+    background-image: url("#{$base-url}/images/icons/pause.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  &.is-paused span::before {
     background-image: url("#{$base-url}/images/icons/play.svg");
   }
 }
