@@ -2,6 +2,10 @@
 @import "vendor/mofo/colors";
 @import "vendor/mofo/type";
 @import "vendor/mofo/buttons";
+
+// Base URL for hosted assets — swap to S3 URL when needed
+$base-url: "https://mozillafoundation.github.io/mozfest-hosted-assets/accelevents";
+
 @import "features/hero-video";
 
 body {

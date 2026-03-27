@@ -1,10 +1,10 @@
 .hero-video-pause-button {
-  background-image: url("/images/icons/pause.svg");
+  background-image: url("#{$base-url}/images/icons/pause.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
 
   &.is-paused {
-    background-image: url("/images/icons/play.svg");
+    background-image: url("#{$base-url}/images/icons/play.svg");
   }
 }

@@ -47,10 +47,11 @@ jobs:
 
       - name: Prepare Pages artifact
         run: |
-          mkdir -p _site/accelevents/css _site/accelevents/js
+          mkdir -p _site/accelevents/css _site/accelevents/js _site/accelevents/images
           cp index.html _site/index.html
           cp -r accelevents/dist/hosted/css/. _site/accelevents/css/
           cp -r accelevents/dist/hosted/js/. _site/accelevents/js/
+          cp -r accelevents/dist/hosted/images/. _site/accelevents/images/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
