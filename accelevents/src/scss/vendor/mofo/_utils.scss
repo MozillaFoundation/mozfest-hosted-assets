@@ -6,6 +6,7 @@
 // =============================================================================
 
 @use "sass:math";
+@use "sass:map";
 
 // Replaces Foundation Framework's rem-calc()
 @function rem-calc($values) {
@@ -30,9 +31,11 @@ $breakpoints: (
   "xxxlarge": 1920px,
 );
 
-// Replaces Foundation Framework's breakpoint() — only "large" (1024px+) is used in these files
+// Replaces Foundation Framework's breakpoint()
 @mixin breakpoint($size) {
-  @media screen and (min-width: 1024px) {
+  $min-width: if(map.has-key($breakpoints, $size), map.get($breakpoints, $size), $size);
+
+  @media screen and (min-width: #{$min-width}) {
     @content;
   }
 }
