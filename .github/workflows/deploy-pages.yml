@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -52,6 +52,24 @@ jobs:
           cp -r accelevents/dist/hosted/css/. _site/accelevents/css/
           cp -r accelevents/dist/hosted/js/. _site/accelevents/js/
           cp -r accelevents/dist/hosted/images/. _site/accelevents/images/
+
+      # Commits the built _site/ contents to the `compiled` branch after every merge to main.
+      # The structure mirrors what's served on GitHub Pages (accelevents/css, js, images)
+      # making it easy to compare compiled output between versions via git history,
+      # without committing build artifacts to the main branch.
+      - name: Commit compiled assets to branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # fetch existing `compiled` branch, or create a fresh orphan branch if it doesn't exist yet
+          git fetch origin compiled:compiled 2>/dev/null || git checkout --orphan compiled
+          git checkout compiled
+          # copy the prepared _site/ contents — mirrors the GitHub Pages URL structure
+          cp -r _site/. .
+          git add accelevents/ index.html
+          # skip commit if build output is identical to last run
+          git diff --cached --quiet || git commit -m "build: compiled assets from ${{ github.sha }}"
+          git push origin compiled
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
