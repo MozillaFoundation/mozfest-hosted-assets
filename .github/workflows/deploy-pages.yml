@@ -56,12 +56,26 @@ jobs:
       # Commits the built _site/ contents to the `compiled` branch after every merge to main.
       # Makes it easy to compare compiled output between versions via git history.
       - name: Commit compiled assets to branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
-          publish_branch: compiled
-          commit_message: "build: compiled assets from ${{ github.sha }}"
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # move built assets out of the repo before switching branches
+          cp -r _site /tmp/compiled-assets
+          # fetch existing `compiled` branch, or create a fresh orphan branch if it doesn't exist yet
+          if git fetch origin compiled:compiled 2>/dev/null; then
+            git checkout compiled
+          else
+            git checkout --orphan compiled
+          fi
+          # remove tracked files and all untracked/ignored leftovers from the main checkout
+          git rm -rf . 2>/dev/null || true
+          git clean -fdx
+          # copy built assets back in
+          cp -r /tmp/compiled-assets/. .
+          git add accelevents/ index.html
+          # skip commit if build output is identical to last run
+          git diff --cached --quiet || git commit -m "build: compiled assets from ${{ github.sha }}"
+          git push origin compiled
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
