@@ -1,6 +1,6 @@
 
 .do-not-edit---generated-by-mozfest-hosted-assets-build-pipeline {
-  /* mozfest-hosted-assets | Accelevents | main | built: 2026-04-02T21:16:15.405Z */
+  /* mozfest-hosted-assets | Accelevents | main | built: 2026-04-02T21:41:40.845Z */
   background: transparent;
 }
 /* stylelint-disable-next-line scss/dollar-variable-colon-space-after --
@@ -742,6 +742,10 @@ a.btn-topic {
 }
 a.btn-topic:hover {
   background: #f88539;
+}
+
+#hero_video_pause_button .bee-button-content {
+  display: none;
 }
 
 .hero-video-pause-button {
