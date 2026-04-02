@@ -53,7 +53,17 @@ jobs:
           cp -r accelevents/dist/hosted/js/. _site/accelevents/js/
           cp -r accelevents/dist/hosted/images/. _site/accelevents/images/
 
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
       # Commits the built _site/ contents to the `compiled` branch after every merge to main.
+      # Runs after Pages deployment so _site/ is already uploaded before we clean the working tree.
       # Makes it easy to compare compiled output between versions via git history.
       - name: Commit compiled assets to branch
         run: |
@@ -76,12 +86,3 @@ jobs:
           # skip commit if build output is identical to last run
           git diff --cached --quiet || git commit -m "build: compiled assets from ${{ github.sha }}"
           git push origin compiled
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
