@@ -62,8 +62,12 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # fetch existing `compiled` branch, or create a fresh orphan branch if it doesn't exist yet
-          git fetch origin compiled:compiled 2>/dev/null || git checkout --orphan compiled
-          git checkout compiled
+          if git fetch origin compiled:compiled 2>/dev/null; then
+            git checkout compiled
+          else
+            git checkout --orphan compiled
+            git rm -rf . 2>/dev/null || true
+          fi
           # copy the prepared _site/ contents — mirrors the GitHub Pages URL structure
           cp -r _site/. .
           git add accelevents/ index.html
