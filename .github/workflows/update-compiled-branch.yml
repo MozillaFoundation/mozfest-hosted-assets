@@ -6,8 +6,7 @@ on:
       - main
     paths:
       - "accelevents/**"
-      - "index.html"
-      - ".github/workflows/deploy-pages.yml"
+      - ".github/workflows/update-compiled-branch.yml"
   workflow_dispatch:
 
 permissions:
@@ -43,7 +42,6 @@ jobs:
       - name: Prepare artifact
         run: |
           mkdir -p _site/accelevents/css _site/accelevents/js _site/accelevents/images
-          cp index.html _site/index.html
           cp -r accelevents/dist/hosted/css/. _site/accelevents/css/
           cp -r accelevents/dist/hosted/js/. _site/accelevents/js/
           cp -r accelevents/dist/hosted/images/. _site/accelevents/images/
@@ -67,7 +65,7 @@ jobs:
           git clean -fdx
           # copy built assets back in
           cp -r /tmp/compiled-assets/. .
-          git add accelevents/ index.html
+          git add accelevents/
           # skip commit if build output is identical to last run
           git diff --cached --quiet || git commit -m "build: compiled assets from ${{ github.sha }}"
           git push origin compiled

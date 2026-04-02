@@ -18,15 +18,9 @@ yarn workspace accelevents build
 
 ## Hosting
 
-Hosted assets (`dist/hosted/`) are deployed to GitHub Pages on every push to `main` that changes source files. The deploy workflow builds the assets and publishes them via GitHub Actions. Widget assets (`dist/embed/`) are not deployed.
+Hosted assets (`dist/hosted/`) are served from S3. Widget assets (`dist/embed/`) are not deployed.
 
-**Testing URL pattern:**
-
-```text
-https://mozillafoundation.github.io/mozfest-hosted-assets/{platform}/{css|js}/{filename}
-```
-
-**Production** assets are served from S3.
+On every push to `main` that changes source files, the CI workflow builds the assets and commits the output to the `compiled` branch. Copy the files from `compiled` to S3 manually.
 
 ## Platforms
 
