@@ -66,11 +66,12 @@ jobs:
             git checkout compiled
           else
             git checkout --orphan compiled
-            git rm -rf . 2>/dev/null || true
           fi
-          # copy the prepared _site/ contents — mirrors the GitHub Pages URL structure
-          cp -r _site/. .
-          git add accelevents/ index.html
+          # clear everything so no leftover files from main bleed in
+          git rm -rf . 2>/dev/null || true
+          # copy only the compiled accelevents assets — mirrors the GitHub Pages URL structure
+          cp -r _site/accelevents .
+          git add accelevents/
           # skip commit if build output is identical to last run
           git diff --cached --quiet || git commit -m "build: compiled assets from ${{ github.sha }}"
           git push origin compiled
