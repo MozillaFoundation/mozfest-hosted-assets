@@ -7,9 +7,19 @@
 $base-url: "https://mozillafoundation.github.io/mozfest-hosted-assets/accelevents";
 
 @import "features/hero-video";
+@import "features/order-process";
 
-body {
+* {
   font-family: $body-font-family !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $header-font-family !important;
 }
 
 $breakpoints: (

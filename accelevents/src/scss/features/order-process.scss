@@ -1,0 +1,7 @@
+// Accelevents-specific heading classes that won't be caught by h1–h6 selectors.
+// Add any new heading-ish classes here to apply the header font.
+.ae-heading3,
+.ae-heading4,
+.stepper-main .step-block ul li {
+  font-family: $header-font-family !important;
+}
