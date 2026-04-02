@@ -1,5 +1,11 @@
 @use "sass:map";
 
+// Hide the default BEE button content immediately so it never flashes before
+// JS replaces it with the accessible <button> element.
+#hero_video_pause_button .bee-button-content {
+  display: none;
+}
+
 .hero-video-pause-button {
   @include mofo-text-style($header-styles, "h5", $header-font-family);
 
