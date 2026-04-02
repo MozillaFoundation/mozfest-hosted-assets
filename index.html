@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MozFest Hosted Assets</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: system-ui, sans-serif;
+        background: #f5f5fd;
+        color: #111;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1rem;
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid #b7b9fa;
+        border-radius: 16px;
+        padding: 2.5rem;
+        max-width: 560px;
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+        margin: 0 0 0.75rem;
+        line-height: 1.2;
+      }
+
+      p {
+        color: #444;
+        margin: 0 0 2rem;
+        line-height: 1.6;
+      }
+
+      .label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: #888;
+        margin-bottom: 0.5rem;
+      }
+
+      .url-pattern {
+        background: #e7e7fc;
+        border-radius: 8px;
+        padding: 0.85rem 1rem;
+        font-family: ui-monospace, monospace;
+        font-size: 0.8rem;
+        color: #111;
+        word-break: break-all;
+        line-height: 1.6;
+      }
+
+      .url-pattern em {
+        font-style: normal;
+        background: #d3d5fc;
+        border-radius: 4px;
+        padding: 0.1em 0.3em;
+        color: #0003a6;
+      }
+
+      hr {
+        border: none;
+        border-top: 1px solid #e7e7fc;
+        margin: 2rem 0;
+      }
+
+      .note {
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: 0.5rem;
+        line-height: 1.5;
+      }
+
+      .note code {
+        font-family: ui-monospace, monospace;
+        background: #e7e7fc;
+        border-radius: 4px;
+        padding: 0.1em 0.35em;
+        font-size: 0.95em;
+        color: #0003a6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>MozFest Hosted Assets</h1>
+      <p>
+        Static assets for MozFest platforms.<br />
+        This GitHub Pages site is used for testing — production assets are
+        served from S3.
+      </p>
+      <div class="label">Hosted assets (link as external files)</div>
+      <div class="url-pattern">
+        https://mozillafoundation.github.io/mozfest-hosted-assets/<em>{platform}</em>/<em>{css|js}</em>/<em
+          >{filename}</em
+        >
+      </div>
+      <hr />
+      <div class="label">Platform widgets (paste into dashboard)</div>
+      <p class="note">
+        Widget assets are not hosted. Copy the compiled CSS or JS from
+        <code>dist/embed/</code> and paste directly into the platform dashboard.
+      </p>
+    </div>
+  </body>
+</html>
