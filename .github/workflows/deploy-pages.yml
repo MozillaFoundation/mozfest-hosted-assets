@@ -54,27 +54,14 @@ jobs:
           cp -r accelevents/dist/hosted/images/. _site/accelevents/images/
 
       # Commits the built _site/ contents to the `compiled` branch after every merge to main.
-      # The structure mirrors what's served on GitHub Pages (accelevents/css, js, images)
-      # making it easy to compare compiled output between versions via git history,
-      # without committing build artifacts to the main branch.
+      # Makes it easy to compare compiled output between versions via git history.
       - name: Commit compiled assets to branch
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          # fetch existing `compiled` branch, or create a fresh orphan branch if it doesn't exist yet
-          if git fetch origin compiled:compiled 2>/dev/null; then
-            git checkout compiled
-          else
-            git checkout --orphan compiled
-          fi
-          # clear everything so no leftover files from main bleed in
-          git rm -rf . 2>/dev/null || true
-          # copy only the compiled accelevents assets — mirrors the GitHub Pages URL structure
-          cp -r _site/accelevents .
-          git add accelevents/
-          # skip commit if build output is identical to last run
-          git diff --cached --quiet || git commit -m "build: compiled assets from ${{ github.sha }}"
-          git push origin compiled
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: compiled
+          commit_message: "build: compiled assets from ${{ github.sha }}"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
