@@ -1,4 +1,4 @@
-name: Deploy compiled assets to GitHub Pages
+name: Update compiled branch
 
 on:
   push:
@@ -6,14 +6,11 @@ on:
       - main
     paths:
       - "accelevents/**"
-      - "index.html"
-      - ".github/workflows/deploy-pages.yml"
+      - ".github/workflows/update-compiled-branch.yml"
   workflow_dispatch:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
@@ -22,9 +19,6 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout
@@ -45,25 +39,14 @@ jobs:
         working-directory: accelevents
         run: yarn build
 
-      - name: Prepare Pages artifact
+      - name: Prepare artifact
         run: |
           mkdir -p _site/accelevents/css _site/accelevents/js _site/accelevents/images
-          cp index.html _site/index.html
           cp -r accelevents/dist/hosted/css/. _site/accelevents/css/
           cp -r accelevents/dist/hosted/js/. _site/accelevents/js/
           cp -r accelevents/dist/hosted/images/. _site/accelevents/images/
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
       # Commits the built _site/ contents to the `compiled` branch after every merge to main.
-      # Runs after Pages deployment so _site/ is already uploaded before we clean the working tree.
       # Makes it easy to compare compiled output between versions via git history.
       - name: Commit compiled assets to branch
         run: |
@@ -82,7 +65,7 @@ jobs:
           git clean -fdx
           # copy built assets back in
           cp -r /tmp/compiled-assets/. .
-          git add accelevents/ index.html
+          git add accelevents/
           # skip commit if build output is identical to last run
           git diff --cached --quiet || git commit -m "build: compiled assets from ${{ github.sha }}"
           git push origin compiled

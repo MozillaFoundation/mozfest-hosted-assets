@@ -4,7 +4,7 @@
 @import "vendor/mofo/buttons";
 
 // Base URL for hosted assets — swap to S3 URL when needed
-$base-url: "https://mozillafoundation.github.io/mozfest-hosted-assets/accelevents";
+$base-url: "https://mozillafestival-accelevents-assets.s3.us-east-1.amazonaws.com/static";
 
 @import "features/hero-video";
 @import "features/order-process";
