@@ -1,6 +1,6 @@
 
 .do-not-edit---generated-by-mozfest-hosted-assets-build-pipeline {
-  /* mozfest-hosted-assets | Accelevents | main | built: 2026-04-02T21:41:40.845Z */
+  /* mozfest-hosted-assets | Accelevents | main | built: 2026-04-02T22:29:36.872Z */
   background: transparent;
 }
 /* stylelint-disable-next-line scss/dollar-variable-colon-space-after --
@@ -777,13 +777,13 @@ a.btn-topic:hover {
   height: 32px;
   margin-right: 8px;
   background-color: #fff;
-  background-image: url("https://mozillafoundation.github.io/mozfest-hosted-assets/accelevents/images/icons/pause.svg");
+  background-image: url("https://mozillafestival-accelevents-assets.s3.us-east-1.amazonaws.com/static/images/icons/pause.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
 }
 .hero-video-pause-button.is-paused span::before {
-  background-image: url("https://mozillafoundation.github.io/mozfest-hosted-assets/accelevents/images/icons/play.svg");
+  background-image: url("https://mozillafestival-accelevents-assets.s3.us-east-1.amazonaws.com/static/images/icons/play.svg");
 }
 
 .ae-heading3,
