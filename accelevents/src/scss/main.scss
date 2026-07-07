@@ -9,7 +9,7 @@ $base-url: "https://mozillafestival-accelevents-assets.s3.us-east-1.amazonaws.co
 @import "features/hero-video";
 @import "features/order-process";
 
-* {
+*:not(.fa, .fas, .far, .fal, .fab, .fad, [class^="fa-"], [class*=" fa-"]) {
   font-family: $body-font-family !important;
 }
 
