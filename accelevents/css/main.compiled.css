@@ -1,6 +1,6 @@
 
 .do-not-edit---generated-by-mozfest-hosted-assets-build-pipeline {
-  /* mozfest-hosted-assets | Accelevents | main | built: 2026-04-02T22:29:36.872Z */
+  /* mozfest-hosted-assets | Accelevents | main | built: 2026-07-07T23:30:34.984Z */
   background: transparent;
 }
 /* stylelint-disable-next-line scss/dollar-variable-colon-space-after --
@@ -792,7 +792,7 @@ a.btn-topic:hover {
   font-family: "Mozilla Headline", "Helvetica Neue", Arial, sans-serif !important;
 }
 
-* {
+*:not(.fa, .fas, .far, .fal, .fab, .fad, [class^=fa-], [class*=" fa-"]) {
   font-family: "Mozilla Text", "Helvetica Neue", Arial, sans-serif !important;
 }
 
