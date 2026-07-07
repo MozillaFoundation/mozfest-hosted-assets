@@ -20,7 +20,7 @@ yarn workspace accelevents build
 
 Hosted assets (`dist/hosted/`) are served from S3. Widget assets (`dist/embed/`) are not deployed.
 
-On every push to `main` that changes source files, the CI workflow builds the assets and commits the output to the `compiled` branch. Copy the files from `compiled` to S3 manually.
+On every push to `main` that changes source files, the CI workflow builds the assets and commits the output to the `compiled` branch. Copy the files from `compiled` to the S3 bucket `mozillafestival-accelevents-assets` manually.
 
 ## Platforms
 
