@@ -3,8 +3,9 @@
 @import "vendor/mofo/type";
 @import "vendor/mofo/buttons";
 
-// Base URL for hosted assets — swap to S3 URL when needed
-$base-url: "https://mozillafestival-accelevents-assets.s3.us-east-1.amazonaws.com/static";
+// CloudFront domain for mozillafestival-accelevents-assets bucket.
+// Do not swap to raw S3 URL — the bucket blocks public access; only CloudFront (OAC) can read it.
+$base-url: "https://d1h85kik48igq8.cloudfront.net/static";
 
 @import "features/hero-video";
 @import "features/order-process";
