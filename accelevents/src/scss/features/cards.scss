@@ -1,0 +1,52 @@
+/* stylelint-disable selector-class-pattern -- Accelevents owns these third-party class names. */
+
+// Art and Booths image cards
+.ae-expo-card > .thumbnail {
+  isolation: isolate;
+
+  .__expo-card {
+    z-index: 1;
+  }
+
+  &.height-auto-expo {
+    &::before {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(to bottom, rgb(22 22 22 / 0%), #161616 100%);
+      content: "";
+      pointer-events: none;
+    }
+
+    .__expo-card,
+    .__expo-card * {
+      color: #fff !important;
+    }
+  }
+
+  &:not(.height-auto-expo) {
+    background-color: #f89f62;
+
+    .__expo-card,
+    .__expo-card * {
+      color: #161616 !important;
+    }
+  }
+}
+
+// Agenda cards
+.session_slider_block {
+  // Keen Slider stretches each slide to the tallest item in its row. Propagate
+  // that height through Accelevents' otherwise content-sized card wrappers.
+  .keen-slider__slide > div {
+    height: calc(100% - 16px);
+  }
+
+  .session-details-section-agenda,
+  .session-details-section-agenda > .session-details-container {
+    height: 100%;
+  }
+}
+
+/* stylelint-enable selector-class-pattern */
