@@ -9,6 +9,7 @@ $base-url: "https://d1h85kik48igq8.cloudfront.net/static";
 
 @import "features/hero-video";
 @import "features/order-process";
+@import "features/cards";
 
 *:not(.fa, .fas, .far, .fal, .fab, .fad, [class^="fa-"], [class*=" fa-"]) {
   font-family: $body-font-family !important;
